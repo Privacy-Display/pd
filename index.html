@@ -14,41 +14,53 @@
     width: 100%;
     height: 100vh;
   }
-  
+
+  /* Image Sections */
   .top-section {
     height: 30vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: black;
   }
+
+  @media (orientation: portrait) {
+    .top-section { height: 50vh; }
+    .bottom-section { height: 50vh !important; }
+  }
+
+  /* The Iframe Wrapper (The "Window") */
   .bottom-section {
     height: 70vh;
     width: 100%;
-  }
-  
-  @media (orientation: portrait) {
-    .top-section {
-      height: 50vh;
-    }
-    .bottom-section {
-      height: 50vh;
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
+    overflow: hidden; /* Hide the parts of the iframe that scale outside the box */
+    position: relative;
     background: white;
   }
+
+  /* The Actual Iframe */
+  .scaled-iframe {
+    --scale-factor: 1.25; /* Change this to 1.5 or 2 to make it even bigger */
+    
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    
+    /* 1. Scale the iframe and set the pivot point to the bottom */
+    transform: scale(var(--scale-factor));
+    transform-origin: bottom center;
+    
+    /* 2. Adjust width/height so the content thinks it has more room */
+    width: calc(100% / var(--scale-factor));
+    height: calc(100% / var(--scale-factor));
+    
+    /* 3. Center the iframe after scaling */
+    translate: -50% 0;
+    
+    border: none;
+  }
+
+  img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 
 <div class="container">
