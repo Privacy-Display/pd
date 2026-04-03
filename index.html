@@ -15,7 +15,7 @@
     height: 100vh;
   }
 
-  /* Image Sections */
+  /* Image Section */
   .top-section {
     height: 30vh;
     width: 100%;
@@ -29,33 +29,30 @@
     .bottom-section { height: 50vh !important; }
   }
 
-  /* The Iframe Wrapper (The "Window") */
+  /* The "Window" */
   .bottom-section {
     height: 70vh;
     width: 100%;
-    overflow: hidden; /* Hide the parts of the iframe that scale outside the box */
+    overflow: hidden; 
     position: relative;
     background: white;
   }
 
-  /* The Actual Iframe */
+  /* The Iframe: Pushed to be massive, then scaled from the bottom */
   .scaled-iframe {
-    --scale-factor: 1.25; /* Change this to 1.5 or 2 to make it even bigger */
-    
     position: absolute;
+    /* 1. Make it significantly larger than the container */
+    width: 200%; 
+    height: 200%; 
+    
+    /* 2. Position it relative to the bottom center */
     bottom: 0;
     left: 50%;
     
-    /* 1. Scale the iframe and set the pivot point to the bottom */
-    transform: scale(var(--scale-factor));
+    /* 3. Scale and Pivot */
+    /* Adjust 'scale' up (e.g., 1.5) to zoom in more */
+    transform: translateX(-50%) scale(1.2); 
     transform-origin: bottom center;
-    
-    /* 2. Adjust width/height so the content thinks it has more room */
-    width: calc(100% / var(--scale-factor));
-    height: calc(100% / var(--scale-factor));
-    
-    /* 3. Center the iframe after scaling */
-    translate: -50% 0;
     
     border: none;
   }
