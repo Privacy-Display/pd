@@ -4,11 +4,11 @@
     padding: 0;
     height: 100%;
     width: 100%;
-    overflow: hidden; /* Stops the page from scrolling */
+    overflow: hidden;
     background: black;
   }
 
-  /* Layer 1: The Iframe (Fills the whole background) */
+  /* Layer 1: The Website (Full Background) */
   .full-screen-iframe {
     position: absolute;
     top: 0;
@@ -16,28 +16,38 @@
     width: 100%;
     height: 100%;
     border: none;
-    z-index: 1; /* Sits at the back */
+    z-index: 1;
   }
 
-  /* Layer 2: The Image Overlay (Sits on top) */
-  .top-overlay {
+  /* Layer 2: Common Overlay Styles */
+  .overlay {
     position: absolute;
-    top: 0;
     left: 0;
     width: 100%;
-    height: 30vh; /* Takes up top 30% of screen */
-    background: black; /* Fills the "void" around the image */
+    background: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10; /* Sits in front of the iframe */
-    pointer-events: none; /* IMPORTANT: Allows you to click the website THROUGH the image */
+    z-index: 10;
+    pointer-events: none; /* Allows clicking the site through the images */
   }
 
+  /* Header specific (Top 30%) */
+  .header-overlay {
+    top: 0;
+    height: 30vh;
+  }
+
+  /* Footer specific (Bottom 10% - adjust as needed) */
+  .footer-overlay {
+    bottom: 0;
+    height: 10vh; 
+  }
+
+  /* Responsive adjustment for Vertical screens */
   @media (orientation: portrait) {
-    .top-overlay {
-      height: 30vh; /* 30% for vertical screens */
-    }
+    .header-overlay { height: 33vh; }
+    .footer-overlay { height: 15vh; }
   }
 
   img {
@@ -51,6 +61,10 @@
         allow="xr-spatial-tracking"
         class="full-screen-iframe"></iframe>
 
-<div class="top-overlay">
-  <img src="PD-text.jpg" alt="Privacy Display Header">
+<div class="overlay header-overlay">
+  <img src="PD-text.jpg" alt="Header">
+</div>
+
+<div class="overlay footer-overlay">
+  <img src="PD-discl.jpg" alt="Footer">
 </div>
