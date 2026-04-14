@@ -1,0 +1,86 @@
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: black;
+  }
+
+  /* Layer 1: The Website (Full Background) */
+  .full-screen-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 1;
+  }
+
+  /* Layer 2: Common Overlay Styles */
+  .overlay {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none; /* Allows clicking the site through the images */
+  }
+
+  /* Header specific (Top 30%) */
+  .header-overlay {
+    top: 0;
+    height: 30vh;
+  }
+
+/* Default Footer (Landscape and standard Portrait) */
+.footer-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 7vh; /* Small height for landscape */
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* 2. THE OVERRIDE (for skinny/vertical screens) */
+/* This MUST come after the default to work properly */
+@media (max-aspect-ratio: 1/2) {
+  .footer-overlay {
+    height: 13vh !important; /* The '!important' forces it to stick */
+    background: black; /* Ensures the background stays solid */
+  }
+  
+  .header-overlay {
+    height: 31vh; /* You can also adjust the header here if needed */
+  }
+}
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+</style>
+
+<iframe src="https://playcanv.as/b/2756fbb0"
+        allow="xr-spatial-tracking"
+        class="full-screen-iframe"></iframe>
+
+<div class="overlay header-overlay">
+  <img src="PD-text.jpg" alt="Header">
+</div>
+
+<div class="overlay footer-overlay">
+  <img src="PD-discl.jpg" alt="Footer">
+</div>
